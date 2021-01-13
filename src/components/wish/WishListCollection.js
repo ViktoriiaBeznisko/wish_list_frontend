@@ -9,6 +9,7 @@
 // import WishList from "./WishList"
 
 
+
 // class WishListCollection extends Component {
 
 // componentDidMount(){
@@ -21,6 +22,9 @@
 // componentWillUnmount(){
 //     this.props.unsetWishList()
 //   }
+
+
+
 
 // renderPage = () => {
 //     const { name, link, wishes } = this.props
@@ -43,6 +47,7 @@
 // props.wish_lists.map((wish_list, index) => {
 //     return <WishList wish_list={wish_list} key={wish_list.id} index={index} />
 // })
+
 
 
 

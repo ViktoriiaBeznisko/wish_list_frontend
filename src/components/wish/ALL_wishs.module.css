@@ -1,0 +1,256 @@
+.firstBlock{
+    height: 100px;
+    display: flex;
+    position: relative;
+    margin-top: 85px;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+.logout{
+    font-size: 30px;
+    color : #5056EC;
+    background : transparent;
+    border : none;
+    outline : none;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 20px;
+}
+.title{
+    color : #646464;
+    font-size: 65px;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: normal;
+}
+.listNAME{
+    margin-top: 22px;
+    font-size: 65px;
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: normal;
+    margin-bottom: 22px;
+}
+.changelist{
+    background : #E2E2E2;
+    border-radius: 20px;
+    width: 345px;
+    height: 46px;
+    border: none;
+    outline: none;
+    color : rgba(68, 68, 68, 1);
+    font-size: 30px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+.wishBlockImportant{
+    border: 2px solid rgba(95, 95, 95, 0.22);
+    width: 829px;
+    height: 400px;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+.wishBlockImportant::-webkit-scrollbar {
+    width: 10px;
+}
+
+.wishBlockImportant::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
+
+.wishBlockImportant::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+.wishBlockImportant .wish_ITEM+.wish_ITEM{
+    margin-top: 91px;
+}
+.wish_ITEM{
+    background : #D7D7D7;
+    width: 100%;
+    height: 157px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.wish_ITEM_text{
+    font-size: 35px;
+    color : white;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+.wish_ITEM_link{
+    font-size: 28px;
+    color : #898989;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: color 0.5s;
+}
+.wish_ITEM_link:hover{
+    color : rgba(170, 113, 113, 1)
+}
+.wish_ITEM_titleBlock{
+    height: 100%;
+    
+}
+.wish_ITEM_text_icons{
+    height: 100%;
+    display: flex;
+}
+.wish_ITEM_text_icons_innerBlock * {
+    display: block;
+    font-size: 50px;
+    margin-right: 25px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+/*FF7D7D*/
+.wish_ITEM_text_icons_copyBlock{
+    position: relative;
+    width: 100px;
+}
+.wish_ITEM_text_icons_deleteIcon{
+    color : #FF7D7D;
+}
+
+.wish_ITEM_text_icons_deleteIcon:hover{
+color : rgba(239, 61, 61, 1);
+}
+.wish_ITEM_text_icons_editIcon,.wish_ITEM_text_icons_editIcon{
+    color : white;
+}
+.wish_ITEM_text_icons_editIcon:hover,.wish_ITEM_text_icons_editIcon:hover{
+    color : rgba(212, 227, 238, 1);
+}
+
+.none_display{
+    /*visibility: hidden;*/
+    opacity: 0;
+}
+.item_copy{
+    color : #5056EC;
+    font-size: 20px;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    cursor: pointer;
+}
+.changeInput{
+    margin: 0 auto;
+    width: 444px;
+    margin-bottom: 80px;
+}
+.changeInput_title{
+    font-size: 30px;
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 16px;
+}
+.changeInput_input{
+    background : #D8EEEF;
+    height: 52px;
+    width: 100%;
+    color : rgba(82, 82, 82, 1);
+    font-size: 22px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+}
+.changeInput_input::placeholder{
+    color : rgba(156, 156, 156, 1);
+}
+.changeInput_send{
+    border: none;
+    outline: none;
+    background : #E2E2E2;
+    border-radius: 20px;
+    width: 224px;
+    height: 46px;
+    font-size: 30px;
+    color : white;
+    display: block;
+    margin: 0 auto;
+    margin-top: 38px;
+    transition: 0.5s background;
+}
+.changeInput_send:hover{
+    background : rgba(169, 169, 169, 1);
+}
+@media (max-width: 1060px) {
+    .title{
+        font-size: 50px;
+    }
+    .listNAME{
+        font-size: 46px;
+    }
+}
+@media (max-width: 844px) {
+    .listNAME{
+        margin-top: 0;
+    }
+    .wishBlockImportant{
+        width: 90%;
+    }
+    .title{
+        font-size: 41px;
+
+    }
+    .logout{
+        position: static;
+        margin-bottom: 25px;
+    }
+    .firstBlock{
+        display: block;
+        margin-bottom: 40px;
+    }
+}
+@media (max-width: 484px) {
+   .title{
+       font-size: 32px;
+   }
+    .listNAME{
+        font-size: 33px;
+    }
+}
+@media (max-width: 388px) {
+    .title{
+        font-size: 26px;
+    }
+    .listNAME{
+        font-size: 29px;
+    }
+    .firstBlock{
+        margin-bottom: 0;
+    }
+    .changelist{
+        width: 65%;
+        font-size: 22px;
+    }
+
+}
+@media (max-width: 316px) {
+    .logout {
+        font-size: 20px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .wish_ITEM_text_icons_copyBlock {
+        width: 20%;
+    }
+}
+@media (max-width: 560px) {
+    .changeInput{
+        width: 90%;
+    }
+}

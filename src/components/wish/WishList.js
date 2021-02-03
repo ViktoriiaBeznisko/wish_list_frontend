@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
   user: state.user
 })
 
-export default connect(mapStateToProps, { submitWishList, wishListChange, setWishLists, unsetWishList, setSelectedWishlists, updateWishList, deleteWishList, submitWish, wishChange, setWishes, setSelectedWish, updateWish, deleteWish, unsetWish })(WishList)
+// export default connect(mapStateToProps, { submitWishList, wishListChange, setWishLists, unsetWishList, setSelectedWishlists, updateWishList, deleteWishList, submitWish, wishChange, setWishes, setSelectedWish, updateWish, deleteWish, unsetWish })(WishList)
 
 
-// export default WishList;
+export default WishList;

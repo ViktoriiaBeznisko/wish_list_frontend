@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setWishLists, autoLogin, logout } from './redux/actionCreators';
 import { Switch, Route } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 // function App() {
@@ -19,39 +21,25 @@ import { Switch, Route } from 'react-router-dom'
 // export default App;
 
 
-
-class App extends Component  {
-
-  componentDidMount(){
-    localStorage.token && this.props.autoLogin()
-    this.props.setWishLists()
-  }
-
-  render(){
+const App = function(props){
+  useEffect(component_did_mount,[])
+  function component_did_mount(){
+    localStorage.token && props.autoLogin()
+    props.setWishLists()}
     return (
       <>
-        <h1> WISH LISTS COLLECTION </h1>
-        {this.props.user.id
-        ?
-          <>
-          <button onClick={this.props.logout}>Logout!</button>
+        {!props.user.id && <Redirect to={'/login'}/> }
           <Switch>
-            <Route path="/wish_lists" component={WishList}/>
+            <Route path="/wish_lists/:wish_list_ID?" component={WishList}/>
             {/* need ro add link to WISH LIST  so user can create ne one */}
+            <Route path={'/login'} component={Login}/>
           </Switch>
 
-
-          </>
-        :
-          <Login/>
-        }
       </>
     );
   }
-}
 
 
 const mapStateToProps = (state) => ({user: state.user})
 
 export default connect(mapStateToProps, { setWishLists, autoLogin, logout })(App);
-

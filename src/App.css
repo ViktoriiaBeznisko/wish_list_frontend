@@ -128,22 +128,6 @@ h1 {
 
   );
 }
-/* 
-.wish-row:nth-child(4n + 2) {
-  background: linear-gradient(
-    90deg,
-    rgb(71, 21, 151) 100%
-    rgb(241, 0, 189) 0%,
-  );
-}
-
-.wish-row:nth-child(4n + 3) {
-  background: linear-gradient(
-    90deg,
-    rgba(20, 159, 255, 1) 0%,
-    rgba(17, 122, 255, 1) 100%
-  );
-} */
 
 .icons {
   display: flex;

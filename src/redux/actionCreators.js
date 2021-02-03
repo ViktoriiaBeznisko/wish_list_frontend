@@ -1,6 +1,5 @@
 const API = "http://localhost:3000"
 
-
 // thunk allows us to return a function that takes in the argument of dispatch, instead of a plain object representing the action
 
 export const setWishLists= () => {
@@ -50,7 +49,7 @@ export const setSelectedWish = (id) => {
 export const updateWish = (id) => {
   return dispatch => {
     fetch(API + "/wishes" + id, {
-      method: 'PATCH', 
+      method: 'PATCH',
       headers: {
         'Authorization': localStorage.token,
       },
@@ -68,7 +67,7 @@ export const updateWish = (id) => {
 export const updateWishList = (id) => {
   return dispatch => {
     fetch(API + "/wish_lists" + id, {
-      method: 'PATCH', 
+      method: 'PATCH',
       headers: {
         'Authorization': localStorage.token,
       },
@@ -86,7 +85,7 @@ export const updateWishList = (id) => {
 export const deleteWish = (id) => {
   return dispatch => {
     fetch(API + "/wishes" + id, {
-      method: 'DELETE', 
+      method: 'DELETE',
       headers: {
         'Authorization': localStorage.token,
       },
@@ -104,7 +103,7 @@ export const deleteWish = (id) => {
 export const deleteWishList = (id) => {
   return dispatch => {
     fetch(API + "/wish_lists" + id, {
-      method: 'DELETE', 
+      method: 'DELETE',
       headers: {
         'Authorization': localStorage.token,
       },
@@ -197,10 +196,11 @@ export const wishChange = (e) => ({
   payload: {text: e.target.text, link: e.target.link}
 })
 
-export const wishListChange = (e) => ({
-  type: "WISH_LIST_CHANGE",
-  payload: {name: e.target.name}
-})
+export const wishListChange = (value) => {
+  return {
+    type: "WISH_LIST_CHANGE",
+    value
+  }}
 
 export const submitWish = (wishData) => {
   return dispatch => {

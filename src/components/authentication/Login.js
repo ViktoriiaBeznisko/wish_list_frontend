@@ -1,57 +1,76 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleSignup, handleLoginFormChange, sendSignup, sendLogin } from '../../redux/actionCreators'
-
+import { toggleSignup, handleLoginFormChange, sendSignup, sendLogin ,setWishLists} from '../../redux/actionCreators'
+import {Redirect} from 'react-router-dom';
+import classes from './Login.module.css';
 const Login = (props) => {
   const { signup, toggleSignup, form, handleLoginFormChange, sendSignup, sendLogin } = props
   const { username, password, passwordConfirmation } = form
-
+  console.log(props)
+  if (props.username){
+    console.log('HERE')
+    return <Redirect to={'/wish_lists'}/>
+  }
   const onSubmit = (e) => {
     e.preventDefault()
     if (signup){
       if (password == passwordConfirmation){
         sendSignup({username: username, password: password})
-      } else {
-        alert("Passwords don't match!")
       }
-    } else {
+    }
+    else {
       sendLogin({username: username, password: password})
     }
   }
-
+  const toggle  = (e) => {
+    e.preventDefault()
+    toggleSignup()
+  }
+  // <form onSubmit={props.handleSubmit}>
+  //   <div className={classes.loginBlock}>
+  //     <h4 className={classes.inputTitle}>Email</h4>
+  //     <Field type="text"  component={Input} name='email'
+  //            validate={email_login_val} className={classes.input} autoComplete={'off'} /><br />
+  //
+  //     <h4 className={classes.inputTitle}>Password</h4>
+  //     <Field type="password" placeholder='password' component={Input}
+  //            name='password' validate={password_login_val} className={classes.input} autoComplete={'off'}  /><br />
+  //   </div>
+  //   <div className={props.error ? classes.error : classes.hidden}>
+  //     <span>{props.error}</span>
+  //   </div>
+  //
+  //   <button className={classes.loginButton}>Login</button>
+  // </form>
   return(
     <>
-      <h3>{signup ? "Sign up!" : "Login!"} </h3>
-      <form onSubmit={ onSubmit }>
-        <label>
-          Username:
-          <input type="text" name="username" value={username} onChange={handleLoginFormChange} />
-        </label><br/>
-        <label>
-          Password:
-          <input type="password" name="password" value={password} onChange={handleLoginFormChange} />
-        </label><br/>
-        {signup &&
-          <>
-            <label>
-              Password Confirmation:
-              <input type="password" name="passwordConfirmation" value={passwordConfirmation} onChange={handleLoginFormChange} />
-            </label>
-          </>
-        }
-        <br/>
-        <input type="submit" value="Submit" />
+      <form onSubmit={ onSubmit } className={classes.main}>
+        <h2 className={classes.title+' '+classes.titleFirst}>{!signup ? 'Hello.' : null}</h2>
+        <h2 className={classes.title}>{!signup ? 'Welcome back' : 'Register'}</h2>
+        <div className={classes.loginBlock}>
+          <h4 className={classes.inputTitle}>Name:</h4>
+          <input type="text" name="username" value={username} onChange={handleLoginFormChange} className={classes.input} autoComplete={'off'}  />
+          <h4 className={classes.inputTitle}>Password:</h4>
+          <input type="password" name="password" value={password} onChange={handleLoginFormChange} className={classes.input} autoComplete={'off'} />
+          {signup && <h4 className={classes.inputTitle}> Password Confirmation:</h4>}
+          {signup &&
+          <input type="password" name="passwordConfirmation"
+                                          value={passwordConfirmation} onChange={handleLoginFormChange}
+                                          className={classes.input} autoComplete={'off'}/>}
+          <button onClick={toggle} className={classes.orSignUp}>{signup ? "Login" : "Register"}</button>
+          <input type="submit" value={!signup ? "Login" : "Register"} className={!signup ? classes.loginButton : classes.registerButton} />
+        </div>
       </form>
       <br/>
       <br/>
-      <button onClick={toggleSignup}>Or... {signup ? "Login!" : "Sign up!"}</button>
     </>
   )
 }
 
 const mapStateToProps = (state) => ({
   signup: state.user.signup,
-  form: state.user.loginForm
+  form: state.user.loginForm,
+  username : state.user.username
 })
 
-export default connect(mapStateToProps, { toggleSignup, handleLoginFormChange, sendSignup, sendLogin })(Login)
+export default connect(mapStateToProps, { toggleSignup, handleLoginFormChange, sendSignup, sendLogin ,setWishLists})(Login)

@@ -16,6 +16,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { reducer } from './redux/reducer';
 
 
+
+
 const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(

@@ -5,10 +5,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setWishLists, autoLogin, logout } from './redux/actionCreators';
 import { Switch, Route } from 'react-router-dom'
-import { Redirect } from 'react-router-dom';
-import { useEffect } from 'react';
-
-
+import {Redirect} from 'react-router-dom';
+import {useEffect} from 'react';
 // function App() {
 //   return (
 
@@ -19,6 +17,7 @@ import { useEffect } from 'react';
 // }
 
 // export default App;
+
 
 
 const App = function(props){
@@ -43,3 +42,4 @@ const App = function(props){
 const mapStateToProps = (state) => ({user: state.user})
 
 export default connect(mapStateToProps, { setWishLists, autoLogin, logout })(App);
+

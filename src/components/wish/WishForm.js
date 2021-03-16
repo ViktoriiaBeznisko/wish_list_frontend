@@ -91,5 +91,7 @@ function WishForm(props) {
 }
 
 
+
+
 // export default connect(mapStateToProps, { submitWishList, wishListChange, setWishLists, unsetWishList, setSelectedWishlists, updateWishList, deleteWishList, submitWish, wishChange, setWishes, setSelectedWish, updateWish, deleteWish, unsetWish })(WishForm)
 export default WishForm;

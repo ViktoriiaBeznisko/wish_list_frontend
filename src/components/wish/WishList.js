@@ -1,7 +1,7 @@
 import React, { useState,useRef } from 'react';
 import WishForm from './WishForm';
 import Wish from './Wish';
-import { connect } from 'react-redux'
+import {connect, useDispatch, useSelector} from 'react-redux'
 import {
   submitWishList,
   wishListChange,
@@ -17,7 +17,8 @@ import {
   updateWish,
   deleteWish,
   unsetWish,
-  logout
+  logout,
+  setAllWishes, clearSelectedWishLists
 } from '../../redux/actionCreators'
 import {NavLink, Redirect, withRouter} from 'react-router-dom';
 import {useEffect} from 'react';
@@ -28,12 +29,13 @@ import classes from './ALL_wishs.module.css';
 //ALL_REDUCER_MODULE
 
 function WishList(props) {
-  console.log(props)
   // debugger
   //match.params.wish_list_ID
   const [changeList,openChangeList] = useState(false);
   const [wishes, setWishes] = useState(props.wishLists);
   useEffect(mount,[])
+  const dispatch = useDispatch()
+  const selected = useSelector(state => state.wish_lists.selectedWishLists)
   // debugger
   if (!props.user.id){
     return <Redirect to={'/login'} />
@@ -47,12 +49,10 @@ function WishList(props) {
       return;
     }
     // pass wish to the array
-    // debugger
     const newWishes = [...wishes,wish];
-    submitWish(newWishes)
+    props.submitWish(newWishes)
     // setting value to the new wish
     setWishes(newWishes);
-    // console.log(...wishes);
   };
 
   const updateWish = (wishId, newValue) => {
@@ -63,22 +63,18 @@ function WishList(props) {
     // debugger
 
     const newArray = wishes.map(item => {
-      console.log(item)
       //ITEM ID debug
       if (item.id == wishId){
         return {...item,...newValue}
       }
       return item
     })
-
-    // console.log(newArray)
     setWishes(newArray)
   };
-
     // checking in an actual array 
   const removeWish = id => {
     const removedArr = [...wishes].filter(wish => wish.id !== id);
-
+    dispatch(setAllWishes(removedArr))
     setWishes(removedArr);
   };
 
@@ -92,15 +88,16 @@ function WishList(props) {
     });
     setWishes(updatedWishes);
   };
-  console.log('TRUE')
   const send_change_list_value = (value) => {
     props.wishListChange(value)
     openChangeList(false)
   }
+  if (!selected.id && selected.id!==0) return <Redirect to={'/mainpage'} />
   return (
     <>
       <div className={classes.firstBlock}>
       <button onClick={props.logout} className={classes.logout}>Logout!</button>
+      <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logoutQ}>Exit!</button>
       <h1 className={classes.title}> WISH LISTS COLLECTION </h1>
     </div>
       <h1 className={classes.listNAME}>{props.list_name}</h1>
@@ -120,17 +117,14 @@ function WishList(props) {
   );  
 }
 
-const ChangeList = (props) => {
+export const ChangeList = ({send}) => {
   const ref = useRef()
-  const send = () => {
-    props.send(ref.current.value)
-  }
   return (
      <div className={classes.changeInput}>
        <h4 className={classes.changeInput_title}>Name:</h4>
        <input type="text" ref={ref} className={classes.changeInput_input}
        placeholder={'Name'}/>
-       <button onClick={send} className={classes.changeInput_send}>Change!</button>
+       <button onClick={() => send(ref.current.value)} className={classes.changeInput_send}>Done</button>
      </div>
   )
 }

@@ -6,7 +6,7 @@
     max-width: 1920px;
     margin: 0 auto;
 }
-.logout{
+.logout,.logoutQ{
     font-size: 30px;
     color : #5056EC;
     background : transparent;
@@ -16,6 +16,9 @@
     position: absolute;
     left: 0;
     top: 20px;
+}
+.logoutQ{
+    top: 70px;
 }
 .title{
     color : #646464;
@@ -179,7 +182,7 @@ color : rgba(239, 61, 61, 1);
     display: block;
     margin: 0 auto;
     margin-top: 38px;
-    transition: 0.5s background;
+    transition: background-color 0.5s;
 }
 .changeInput_send:hover{
     background : rgba(169, 169, 169, 1);

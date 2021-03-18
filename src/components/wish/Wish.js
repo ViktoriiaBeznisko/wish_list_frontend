@@ -13,7 +13,6 @@ const Wish = ({ wishes, completeWish, removeWish, updateWish,...props }) => {
     link: ''
   });
   const submitUpdate = value => {
-    console.log(value)
     updateWish(edit.id, {text : value.text, link : value.link});
     setEdit({
       id: null,
@@ -28,8 +27,6 @@ const Wish = ({ wishes, completeWish, removeWish, updateWish,...props }) => {
 
 
   if (props.url){
-    console.log(wishes)
-    // console.log(wishes[props.url])
     return <WishItem main={wishes[props.url]} index={props.url}
                      completeWish = {completeWish} removeWish={removeWish} updateWish={updateWish} />
   }
@@ -48,7 +45,6 @@ const WishItem = (wish) => {
     document.execCommand("copy");
   }
   const createLink = (index) => {
-    console.log(index+"CREATE_LINK")
     return `localhost:3000/wish_lists/${index}`
   }
   return(
@@ -81,8 +77,6 @@ const WishItem = (wish) => {
             onClick={() => wish.removeWish(wish.main.id)}
             className={classes.wish_ITEM_text_icons_deleteIcon}
         /></div>
-
-
         </div>
       </div>
   )

@@ -11,7 +11,6 @@ const nullWishForm = {
   link: "",
 }
 
-
 const initialState = {
   wishLists: [],
   selectedWishLists: nullWishLists,

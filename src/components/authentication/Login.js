@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { connect } from 'react-redux'
 import { toggleSignup, handleLoginFormChange, sendSignup, sendLogin ,setWishLists} from '../../redux/actionCreators'
 import {Redirect} from 'react-router-dom';
@@ -6,42 +6,29 @@ import classes from './Login.module.css';
 const Login = (props) => {
   const { signup, toggleSignup, form, handleLoginFormChange, sendSignup, sendLogin } = props
   const { username, password, passwordConfirmation } = form
-  console.log(props)
+  const [errors,setErrors] = useState('')
   if (props.username){
-    console.log('HERE')
-    return <Redirect to={'/wish_lists'}/>
+    return <Redirect to={'/mainpage'}/>
   }
-  const onSubmit = (e) => {
+  const onSubmit = async e => {
     e.preventDefault()
     if (signup){
       if (password == passwordConfirmation){
-        sendSignup({username: username, password: password})
+        const response = await sendSignup({username: username, password: password})
+        setErrors('User exists')
+
       }
     }
     else {
-      sendLogin({username: username, password: password})
+      const response = await sendLogin({username: username, password: password})
+      setErrors('Wrong username or password')
     }
   }
   const toggle  = (e) => {
     e.preventDefault()
     toggleSignup()
   }
-  // <form onSubmit={props.handleSubmit}>
-  //   <div className={classes.loginBlock}>
-  //     <h4 className={classes.inputTitle}>Email</h4>
-  //     <Field type="text"  component={Input} name='email'
-  //            validate={email_login_val} className={classes.input} autoComplete={'off'} /><br />
-  //
-  //     <h4 className={classes.inputTitle}>Password</h4>
-  //     <Field type="password" placeholder='password' component={Input}
-  //            name='password' validate={password_login_val} className={classes.input} autoComplete={'off'}  /><br />
-  //   </div>
-  //   <div className={props.error ? classes.error : classes.hidden}>
-  //     <span>{props.error}</span>
-  //   </div>
-  //
-  //   <button className={classes.loginButton}>Login</button>
-  // </form>
+
   return(
     <>
       <form onSubmit={ onSubmit } className={classes.main}>
@@ -59,6 +46,7 @@ const Login = (props) => {
                                           className={classes.input} autoComplete={'off'}/>}
           <button onClick={toggle} className={classes.orSignUp}>{signup ? "Login" : "Register"}</button>
           <input type="submit" value={!signup ? "Login" : "Register"} className={!signup ? classes.loginButton : classes.registerButton} />
+          {errors && <span className={classes.error}>{errors}</span>}
         </div>
       </form>
       <br/>

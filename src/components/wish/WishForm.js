@@ -13,7 +13,6 @@ function WishForm(props) {
     } else {
       setInput2(e.target.value);
     }
-    // console.log(e.target)
   };
 
   // prevent refresh of this page

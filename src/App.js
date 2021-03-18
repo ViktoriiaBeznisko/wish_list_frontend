@@ -7,17 +7,7 @@ import { setWishLists, autoLogin, logout } from './redux/actionCreators';
 import { Switch, Route } from 'react-router-dom'
 import {Redirect} from 'react-router-dom';
 import {useEffect} from 'react';
-// function App() {
-//   return (
-
-//     <div className="wish-list">
-//       <WishList />
-//     </div>
-//   );
-// }
-
-// export default App;
-
+import WishListsMain from "./components/wish_lists/List";
 
 
 const App = function(props){
@@ -32,6 +22,7 @@ const App = function(props){
             <Route path="/wish_lists/:wish_list_ID?" component={WishList}/>
             {/* need ro add link to WISH LIST  so user can create ne one */}
             <Route path={'/login'} component={Login}/>
+            <Route path={'/mainpage'} component={WishListsMain}/>
           </Switch>
 
       </>

@@ -7,7 +7,7 @@ import { setWishLists, autoLogin, logout } from './redux/actionCreators';
 import { Switch, Route } from 'react-router-dom'
 import {Redirect} from 'react-router-dom';
 import {useEffect} from 'react';
-import WishListsMain from "./components/wish_lists/List";
+import WishListsMain from './components/wish_lists/List';
 
 
 const App = function(props){

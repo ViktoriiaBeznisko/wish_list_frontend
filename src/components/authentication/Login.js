@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { toggleSignup, handleLoginFormChange, sendSignup, sendLogin ,setWishLists} from '../../redux/actionCreators'
 import {Redirect} from 'react-router-dom';
 import classes from './Login.module.css';
+
+
 const Login = (props) => {
   const { signup, toggleSignup, form, handleLoginFormChange, sendSignup, sendLogin } = props
   const { username, password, passwordConfirmation } = form
@@ -28,7 +30,22 @@ const Login = (props) => {
     e.preventDefault()
     toggleSignup()
   }
-
+  // <form onSubmit={props.handleSubmit}>
+  //   <div className={classes.loginBlock}>
+  //     <h4 className={classes.inputTitle}>Email</h4>
+  //     <Field type="text"  component={Input} name='email'
+  //            validate={email_login_val} className={classes.input} autoComplete={'off'} /><br />
+  //
+  //     <h4 className={classes.inputTitle}>Password</h4>
+  //     <Field type="password" placeholder='password' component={Input}
+  //            name='password' validate={password_login_val} className={classes.input} autoComplete={'off'}  /><br />
+  //   </div>
+  //   <div className={props.error ? classes.error : classes.hidden}>
+  //     <span>{props.error}</span>
+  //   </div>
+  //
+  //   <button className={classes.loginButton}>Login</button>
+  // </form>
   return(
     <>
       <form onSubmit={ onSubmit } className={classes.main}>

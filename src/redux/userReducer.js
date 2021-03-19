@@ -23,7 +23,6 @@ const userReducer = (state=initialState, action) => {
         [action.payload.name]: action.payload.value
       }}
     case "SET_USER":
-      console.log({...state, ...action.payload.user})
       // give to us user.id and user name
       return {...state, ...action.payload.user}
     case "LOGOUT":

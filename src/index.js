@@ -19,7 +19,7 @@ import { reducer } from './redux/reducer';
 
 
 const store = createStore(reducer, applyMiddleware(thunk))
-
+window.s = store.getState
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -33,3 +33,8 @@ ReactDOM.render(
 
 
 reportWebVitals();
+
+
+
+
+

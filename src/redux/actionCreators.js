@@ -139,10 +139,10 @@ export const unsetWishList = () => ({type: "UNSET_WISH_LIST"})
 export const toggleSignup = () => ({type: "TOGGLE_SIGNUP"})
 
 export const handleLoginFormChange = (e) => ({
-    type: "LOGIN_FORM_CHANGE",
-    // payload: {name: "username", value: "V"}
-    // payload: {name: "username", value: "VI"}
-    payload: {name: e.target.name, value: e.target.value}
+  type: "LOGIN_FORM_CHANGE",
+  // payload: {name: "username", value: "V"}
+  // payload: {name: "username", value: "VI"}
+  payload: {name: e.target.name, value: e.target.value}
 })
 
 // export const sendSignup = (userData) => {
@@ -205,42 +205,43 @@ export const sendSignup = (userData) => {
 // }
 
 export const sendLogin = (userData) => {
-    return dispatch => {
-      // localhost:3000/users
-        fetch(API + "/login", {
-            method: 'POST', // or 'PUT'
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        })
-        .then(response => response.json())
-        .then(response => {
-            localStorage.token = response.token
-        dispatch({
-            type: "SET_USER",
-            payload: {user: response.user}
-          })
-        })
-    }
+  return dispatch => {
+    // localhost:3000/users
+    fetch(API + "/login", {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+    .then(response => response.json())
+    .then(response => {
+      localStorage.token = response.token
+      dispatch({
+      type: "SET_USER",
+      payload: {user: response.user}
+    })
+  })
+  }
 }
 
 export const autoLogin = () => {
-    return dispatch => {
-        fetch(API + "/autologin", {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Authorization': localStorage.token,
-            },
-        })
-            .then(response => response.json())
-            .then(response => {
-                dispatch({
-                    type: "SET_USER",
-                    payload: {user: response.user}
-                })
-            })
-    }
+  return dispatch => {
+    // localhost:3000/users
+    fetch(API + "/autologin", {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Authorization': localStorage.token,
+      },
+    })
+    .then(response => response.json())
+    .then(response => {
+      dispatch({
+      type: "SET_USER",
+      payload: {user: response.user}
+    })
+  })
+  }
 }
 
 export const wishChange = (e) => {
@@ -317,7 +318,7 @@ export const logout = () => {
 
 export const addWishList = value => {
   return dispatch => {
-      fetch(API + "/wish_lists", {
+      fetch(API + "/wish_lists ", {
           method: 'POST',
           headers: {
               'Authorization': localStorage.token,
@@ -326,9 +327,9 @@ export const addWishList = value => {
           body: JSON.stringify(value)
         })
       .then(res => res.json())
-      .then(wish_list => dispatch({
-          type: "ADD_WISH_LIST",
-          payload: wish_list
+      .then(value => dispatch({
+          type: "ADD_WISH_LIST", 
+          payload: value
         })
     )}
 }

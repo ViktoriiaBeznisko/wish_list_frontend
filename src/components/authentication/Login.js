@@ -4,7 +4,6 @@ import { toggleSignup, handleLoginFormChange, sendSignup, sendLogin ,setWishList
 import {Redirect} from 'react-router-dom';
 import classes from './Login.module.css';
 
-
 const Login = (props) => {
   const { signup, toggleSignup, form, handleLoginFormChange, sendSignup, sendLogin } = props
   const { username, password, passwordConfirmation } = form

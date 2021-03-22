@@ -65,3 +65,14 @@ export const Button = styled.button`
   cursor: pointer;
   
 `
+export const CopyInput = styled.input`opacity: 0;`
+
+export const CopyTitle = styled.span`
+  color : #5056EC;
+  font-size: 20px;
+  position: absolute;
+  display: block;
+  bottom: 0;
+  cursor: pointer;
+  margin-left: 20px;
+`

@@ -11,7 +11,7 @@ import {useLocation} from 'react-router-dom'
 const exists = data => data!==undefined && data!==null
 
 const WishListsMain = () => {
-    const _host = process.env.BASE_URL || 'http://localhost:3000' //developer_mode
+    const _host = process.env.BASE_URL || 'http://localhost:3000' 
     const {username,id} = useSelector(state => state.user),
     dispatch = useDispatch(),
     {wishLists : items,selectedWishLists : selected} = useSelector(state => state.wish_lists),
@@ -31,7 +31,7 @@ const WishListsMain = () => {
         {simpleElem ||
         (elements.length>0 ? elements : <Title color={'#c5c7c9'}>There is no wish lists</Title>)}
         <Button onClick={() => showAdd(!isAdd)}>Add</Button>
-        {isAdd && <ChangeList send={value => dispatch(addWishList(value))} />}
+        {isAdd && <ChangeList send={value => dispatch(addWishList({name : value}))} />}
     </>
 }
 const Item = ({name,remove,select,link}) => {

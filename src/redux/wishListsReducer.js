@@ -19,11 +19,12 @@ const initialState = {
   wishListName : 'DEFAULT_NAME'
 }
 
+
 const wishListsReducer = (state=initialState, action) => {
   console.log(action.type)
   switch (action.type){
     case "SET_WISH_LISTS":
-      return {...state, ...action.payload}
+      return {...state, wishLists :action.payload}
     case "SET_SELECTED_WISH_LIST":
       return {...state, selectedWishLists: action.payload}
     case "UNSET_WISH_LIST":
@@ -52,9 +53,7 @@ const wishListsReducer = (state=initialState, action) => {
         [action.payload.text]: action.payload.value
     }}
     case "ADD_WISH_LIST":
-      const index = state.wishLists[state.wishLists.length-1]?.id + 1
-      return {...state,wishLists : [...state.wishLists,{...nullWishLists,name : action.value,id :
-     !isNaN(index) ? index : 0}]}
+     return {...state,wishLists : [...state.wishLists,action.payload]}
     case 'REMOVE_WISH_LIST':
       return {...state,wishLists: state.wishLists.filter(item => item.id!==action.id)}
     case "CLEAR_SELECTED_WISH_LIST":

@@ -57,7 +57,7 @@ export const setSelectedWish = (id) => {
 
 export const updateWish = (id) => {
     return dispatch => {
-        fetch(API + "/wishes" + id, {
+        fetch(API + "/wishes/" + id, {
             method: 'PATCH',
             headers: {
                 'Authorization': localStorage.token,
@@ -75,7 +75,7 @@ export const updateWish = (id) => {
 
 export const updateWishList = (id) => {
     return dispatch => {
-        fetch(API + "/wish_lists" + id, {
+        fetch(API + "/wish_lists/" + id, {
             method: 'PATCH',
             headers: {
                 'Authorization': localStorage.token,
@@ -93,33 +93,32 @@ export const updateWishList = (id) => {
 
 export const deleteWish = (id) => {
     return dispatch => {
-        fetch(API + "/wishes" + id, {
+        fetch(API + "/wishes/" + id, {
             method: 'DELETE',
             headers: {
                 'Authorization': localStorage.token,
             },
         })
             .then(response => response.json())
-            .then(response => {
-                dispatch({
-                    type: "SET_WISHES",
-                    payload: {wish: response.wish}
-                })
+            .then(response => { 
+                dispatch({type: 'REMOVE_WISH', id})
             })
     }
 }
 
 export const deleteWishList = (id) => {
     return dispatch => {
-        fetch(API + "/wish_lists" + id, {
+        fetch(API + "/wish_lists/" + id, {
             method: 'DELETE',
             headers: {
                 'Authorization': localStorage.token,
             },
-        })
+        }) 
             .then(response => response.json())
             .then(response => {
-                dispatch({type: 'REMOVE_WISH_LIST', id})
+                dispatch({
+                    type: 'REMOVE_WISH_LIST', id})
+                    // payload: {wish_list: response.wish_list}  
             })
     }
 }
@@ -162,15 +161,6 @@ export const sendSignup = (userData) => {
         })
     }
 }
-
-// export const sendLogin = (userData) => {
-//     return async dispatch => {
-//         dispatch({
-//             type: "SET_USER",
-//             payload: {user: {...userData,id :6 }}
-//         })
-//     }
-// }
 
 
 export const sendLogin = (userData) => {
@@ -228,24 +218,24 @@ export const wishChange = (e) => {
   }
 
 export const submitWish = (wishData) => {
-    // return dispatch => {
-    //   fetch(API + "/wishes", {
-    //     method: 'POST', // or 'PUT'
-    //     headers: {
-    //       'Authorization': localStorage.token,
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(wishData)
-    //   })
-    //   .then(res=> res.json())
-    //   .then(wish => dispatch({
-    //     type: "SET_WISHES",
-    //     payload: wish
-    //   }))
+    return dispatch => {
+      fetch(API + "/wishes", {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Authorization': localStorage.token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(wishData)
+      })
+      .then(res=> res.json())
+      .then(wish => dispatch({
+        type: "SET_WISHES",
+        payload: wish
+      }))
 
-    return async dispatch => {
-        console.log('dispatchj')
-        dispatch({type: 'SET_WISHES', payload: wishData[wishData.length - 1]})
+//     return async dispatch => {
+//         console.log('dispatchj')
+//         dispatch({type: 'SET_WISHES', payload: wishData[wishData.length - 1]})
     }
 }
 
@@ -267,38 +257,42 @@ export const submitWishList = (wishListData) => {
     }
 }
 
+// export const addWishList = (data) => {
+//     return async dispatch => {
+//         await fetch(API + "/wish_lists", {
+//           method: 'POST',
+//           headers: {
+//             'Authorization': localStorage.token,
+//           },
+//         })
+//         dispatch({type : 'ADD_WISH_LIST', data})
+//     }
+// }
+
+export const addWishList = (data) => {
+    return dispatch => {
+      fetch(API + "/wish_lists", {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Authorization': localStorage.token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res=> res.json())
+      .then(wish_lists => 
+        // console.log(wish_lists)
+        dispatch({
+        type: "ADD_WISH_LIST",
+        payload: wish_lists
+      }))
+    }
+  }
+
+
 export const logout = () => {
     return dispatch => {
         localStorage.clear("token")
         dispatch({type: "LOGOUT"})
     }
 }
-export const addWishList = value => {
-    return async dispatch => {
-        await fetch(API + "/wish_lists", {
-          method: 'POST',
-          headers: {
-            'Authorization': localStorage.token,
-          },
-        })
-        dispatch({type : 'ADD_WISH_LIST',value})
-    }
-}
-
-// export const addWishList = (WishListData) => {
-//     return dispatch => {
-//       fetch(API + "/wish_lists", {
-//         method: 'POST', // or 'PUT'
-//         headers: {
-//           'Authorization': localStorage.token,
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(WishListData)
-//       })
-//       .then(res=> res.json())
-//       .then(wish_lists => dispatch({
-//         type: "ADD_WISH_LIST",
-//         payload: wish_lists
-//       }))
-//     }
-//   }

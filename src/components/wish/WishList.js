@@ -3,12 +3,10 @@ import WishForm from './WishForm';
 import Wish from './Wish';
 import {connect, useDispatch, useSelector} from 'react-redux'
 import {
-  submitWishList,
   wishListChange,
   setWishLists,
   unsetWishList,
   setSelectedWishlists,
-  updateWishList,
   deleteWishList,
   submitWish,
   wishChange,
@@ -29,14 +27,11 @@ import classes from './ALL_wishs.module.css';
 //ALL_REDUCER_MODULE
 
 function WishList(props) {
-  // debugger
-  //match.params.wish_list_ID
   const [changeList,openChangeList] = useState(false);
   const [wishes, setWishes] = useState(props.wishLists);
   useEffect(mount,[])
   const dispatch = useDispatch()
   const selected = useSelector(state => state.wish_lists.selectedWishLists)
-  // debugger
   if (!props.user.id){
     return <Redirect to={'/login'} />
   }
@@ -56,11 +51,9 @@ function WishList(props) {
   };
 
   const updateWish = (wishId, newValue) => {
-    // debugger
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     }
-    // debugger
 
     const newArray = wishes.map(item => {
       //ITEM ID debug
@@ -88,8 +81,9 @@ function WishList(props) {
     });
     setWishes(updatedWishes);
   };
-  const send_change_list_value = (value) => {
-    props.wishListChange(value)
+  const changeWishList = (value) => {
+    // debugger
+    props.wishListChange({name : value}, selected.id)
     openChangeList(false)
   }
   if (!selected.id && selected.id!==0) return <Redirect to={'/mainpage'} />
@@ -98,11 +92,11 @@ function WishList(props) {
       <div className={classes.firstBlock}>
       <button onClick={props.logout} className={classes.logout}>Logout!</button>
       <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logoutQ}>Exit!</button>
-      <h1 className={classes.title}> WISH LISTS COLLECTION </h1>
+      <h1 className={classes.title}> Details:</h1>
     </div>
       <h1 className={classes.listNAME}>{props.list_name}</h1>
       <button onClick={() => openChangeList(!changeList)} className={classes.changelist}>Change list name</button>
-      {changeList && <ChangeList send={send_change_list_value}/>}
+      {changeList && <ChangeList send={changeWishList}/>}
       <div className={classes.wishBlockImportant}>
       <Wish
         wishes={wishes}
@@ -132,15 +126,13 @@ export const ChangeList = ({send}) => {
 const mapStateToProps = (state) => ({
   wishLists : state.wish_lists.wishLists,
   user: state.user,
-  list_name : state.wish_lists.wishListName
+  list_name : state.wish_lists.selectedWishLists.name
   // list_name : state.wish_lists.name
 })
 
-export default compose(connect(mapStateToProps, { submitWishList
-  , wishListChange, setWishLists, unsetWishList, setSelectedWishlists,
-  updateWishList, deleteWishList, submitWish, wishChange,
+export default compose(connect(mapStateToProps, { wishListChange,
+  setWishLists, unsetWishList, setSelectedWishlists,
+  deleteWishList, submitWish, wishChange,
   setWishes, setSelectedWish, updateWish, deleteWish,
   unsetWish ,logout}),withRouter)(WishList)
 
-
-// export default WishList;

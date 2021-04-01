@@ -21,6 +21,7 @@ const WishListsMain = () => {
     const location = useLocation()
     const wish_id = +location.pathname.split('/')[2]
     if (exists(selected.id)) return <Redirect to={'/wish_lists'} />
+    // if (exists(selected.id)) return <Redirect to={'/wish_lists/' + selected.id} />
     if (!id) return <Redirect to={'/login'} />
     console.log(wish_id)
     const simpleElem = elements[items.findIndex(item => item.id===wish_id)]

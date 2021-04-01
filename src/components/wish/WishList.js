@@ -32,6 +32,7 @@ function WishList(props) {
   useEffect(mount,[])
   const dispatch = useDispatch()
   const selected = useSelector(state => state.wish_lists.selectedWishLists)
+  // const selected = useSelector(state => state.wish_lists.setSelectedWish)
   if (!props.user.id){
     return <Redirect to={'/login'} />
   }
@@ -49,6 +50,8 @@ function WishList(props) {
     // setting value to the new wish
     setWishes(newWishes);
   };
+
+  // {isAdd && <ChangeList send={value => dispatch(addWishList({name : value}))} />}
 
   const updateWish = (wishId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {

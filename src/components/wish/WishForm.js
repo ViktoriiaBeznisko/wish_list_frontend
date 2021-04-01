@@ -23,7 +23,7 @@ function WishForm(props) {
     // generate random number for id 
       id: Math.floor(Math.random() * 10000),
       text: input1,
-      link: input2
+      link: input2,
     });
     setInput1('');
     setInput2('');

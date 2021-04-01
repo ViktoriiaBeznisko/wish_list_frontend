@@ -3,24 +3,27 @@ const API = "http://localhost:3000"
 
 // thunk allows us to return a function that takes in the argument of dispatch, instead of a plain object representing the action
 
+
 export const sendSignup = (userData) => {
-    return async dispatch => {
-        let response = await fetch(API + "/users", {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        })
-        response = response.json()
-        if (response.errors) return true
+    return dispatch => {
+      // localhost:3000/users
+      fetch(API + "/users", {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      })
+      .then(response => response.json())
+      .then(response => {
         localStorage.token = response.token
         dispatch({
-            type: "SET_USER",
-            payload: {user: response.user}
-        })
+        type: "SET_USER",
+        payload: {user: response.user}
+      })
+    })
     }
-}
+  }
 
 export const sendLogin = (userData) => {
     return dispatch => {
@@ -42,6 +45,8 @@ export const sendLogin = (userData) => {
     })
     }
   }
+
+ 
 
 export const autoLogin = () => {
     return dispatch => {
@@ -100,7 +105,11 @@ export const addWishList = (data) => {
 
 export const setWishLists = () => {
     return dispatch => {
-        fetch(API + "/wish_lists")
+        fetch(API + "/wish_lists", {
+            headers: {
+                'Authorization': localStorage.token,
+            },
+        }) 
             .then(res => res.json())
             .then(data => dispatch({
                     type: "SET_WISH_LISTS",
@@ -110,7 +119,25 @@ export const setWishLists = () => {
     }
 }
 
+
 export const unsetWishList = () => ({type: "UNSET_WISH_LIST"})
+
+// export const setSelectedWishlists = (id) => {
+//     return dispatch => {
+//         fetch(API + "/wish_lists/" + id, {
+//             headers: {
+//                 'Authorization': localStorage.token,
+//             },
+//         })
+//             .then(res => res.json())
+//             .then(wish_list => dispatch({
+//                 type: "SET_SELECTED_WISH_LIST",
+//                 payload: wish_list
+//             })
+//         )
+//     }
+// }
+
 
 export const setSelectedWishlists = (id) => {
     return dispatch => {
@@ -123,6 +150,8 @@ export const setSelectedWishlists = (id) => {
         )
     }
 }
+
+
 export const clearSelectedWishLists = () => dispatch => dispatch({type: "CLEAR_SELECTED_WISH_LIST"})
 
 export const wishListChange = (name, id) => {
@@ -217,6 +246,7 @@ export const submitWish = (wishData, wish_list_id) => {
 //         dispatch({type: 'SET_WISHES', payload: wishData[wishData.length - 1]})
     }
 }
+
 
 export const deleteWish = (id) => {
     return dispatch => {

@@ -10,14 +10,16 @@ const Wish = ({ wishes, completeWish, removeWish, updateWish,...props }) => {
   const [edit, setEdit] = useState({
     id: null,
     text: '',
-    link: ''
+    link: '',
+    wish_list_id: ''
   });
   const submitUpdate = value => {
     updateWish(edit.id, {text : value.text, link : value.link});
     setEdit({
       id: null,
       text: '',
-      link: ''
+      link: '',
+      wish_list_id: ''
     });
   };
 
@@ -53,7 +55,7 @@ const WishItem = (wish) => {
           key={wish.index}
       >
         <div key={wish.id} >
-          {/*onClick={() => completeWish(wish.id)}*/}
+          {/*onClick={() => 4(wish.id)}*/}
           <div className={classes.wish_ITEM_titleBlock}>
           <h4 className={classes.wish_ITEM_text}>{wish.main.text} </h4>
           {/*&nbsp;*/}

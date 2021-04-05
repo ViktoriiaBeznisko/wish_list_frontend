@@ -7,6 +7,7 @@ import classes from './ALL_wishs.module.css';
 import {BiInfoCircle} from "react-icons/all";
 
 const Wish = ({ wishes, completeWish, removeWish, updateWish,...props }) => {
+ 
   const [edit, setEdit] = useState({
     id: null,
     text: '',
@@ -47,7 +48,7 @@ const WishItem = (wish) => {
     document.execCommand("copy");
   }
   const createLink = (index) => {
-    return `localhost:3000/wish_lists/${index}`
+    return `localhost:3000/wishes/${index}`
   }
   return(
       <div

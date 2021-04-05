@@ -27,6 +27,7 @@ import classes from './ALL_wishs.module.css';
 //ALL_REDUCER_MODULE
 
 function WishList(props) {
+
   const [changeList,openChangeList] = useState(false);
   const [wishes, setWishes] = useState(props.wishLists);
   useEffect(mount,[])
@@ -36,8 +37,9 @@ function WishList(props) {
   if (!props.user.id){
     return <Redirect to={'/login'} />
   }
-  function mount(){
-    props.setWishLists()
+  function mount()
+  {
+    // props.setWishLists()
   }
 
   const addWish = wish => {
@@ -46,12 +48,12 @@ function WishList(props) {
     }
     // pass wish to the array
     const newWishes = [...wishes,wish];
+    
     props.submitWish(newWishes)
     // setting value to the new wish
     setWishes(newWishes);
   };
 
-  // {isAdd && <ChangeList send={value => dispatch(addWishList({name : value}))} />}
 
   const updateWish = (wishId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
@@ -94,7 +96,7 @@ function WishList(props) {
     <>
       <div className={classes.firstBlock}>
       <button onClick={props.logout} className={classes.logout}>Logout!</button>
-      <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logoutQ}>Exit!</button>
+      <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logout}>Exit!</button>
       <h1 className={classes.title}> Details:</h1>
     </div>
       <h1 className={classes.listNAME}>{props.list_name}</h1>

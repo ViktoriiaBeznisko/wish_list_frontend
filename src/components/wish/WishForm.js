@@ -24,7 +24,9 @@ function WishForm(props) {
       id: Math.floor(Math.random() * 10000),
       text: input1,
       link: input2,
+      
     });
+    debugger
     setInput1('');
     setInput2('');
   };

@@ -199,8 +199,14 @@ export const setAllWishes = data => {
 }
 
 export const setWishes = () => {
+    debugger
     return dispatch => {
-        fetch(API + "/wishes")
+        fetch(API + "/wishes", {
+            // fetch(API + "/wish_lists/" + id + "/wish", {
+            headers: {
+                'Authorization': localStorage.token,
+            },
+        }) 
             .then(res => res.json())
             .then(data => dispatch({
                     type: "SET_WISHES",
@@ -212,22 +218,24 @@ export const setWishes = () => {
 
 export const unsetWish = () => ({type: "UNSET_WISH"})
 
+
+
 export const setSelectedWish = (id) => {
     return dispatch => {
-        fetch(API + "/wish/" + id)
+        fetch(API + "/wishes/" + id)
             .then(res => res.json())
             .then(wish => dispatch({
-                    type: "SET_SELECTED_WISH",
+                    type: "SET_WISH",
                     payload: wish
                 })
             )
     }
 }
 
-export const submitWish = (wishData, wish_list_id) => {
+export const submitWish = (wishData) => {
     debugger
     return dispatch => {
-      fetch(API + "/wish_lists/" + wish_list_id + "/wish", {
+      fetch(API + "/wishes", {
         method: 'POST', // or 'PUT'
         headers: {
           'Authorization': localStorage.token,

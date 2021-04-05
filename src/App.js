@@ -16,7 +16,8 @@ const App = function(){
   useEffect(component_did_mount,[])
   function component_did_mount(){
     localStorage.token && dispatch(autoLogin())
-    dispatch(setWishLists())}
+    dispatch(setWishLists())
+  }
   return (
       <>
         {!user.id && <Redirect to={'/login'}/> }
@@ -25,6 +26,7 @@ const App = function(){
           <Route path={'/login'} component={Login}/>
           <Route path={'/signup'} component={() => <Login signup={true}/>}/>
           <Route path={'/mainpage/:id?'} component={WishListsMain}/>
+          {/* <Route path={'/mainpage'} component={WishListsMain}/> */}
         </Switch>
 
       </>

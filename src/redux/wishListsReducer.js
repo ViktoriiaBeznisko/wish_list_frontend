@@ -57,6 +57,7 @@ const wishListsReducer = (state=initialState, action) => {
     }}
     case "ADD_WISH_LIST":
       return {...state,wishLists : [...state.wishLists,action.payload]}
+
     case "ADD_WISH":
       return {...state,wishLists : [...state.wishLists,action.payload]}    
     case 'REMOVE_WISH_LIST':

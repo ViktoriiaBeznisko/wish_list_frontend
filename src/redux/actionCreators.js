@@ -94,14 +94,14 @@ export const addWishList = (data) => {
         },
         body: JSON.stringify(data)
       })
-      .then(res=> res.json())
-      .then(wish_lists => 
-        dispatch({
+      .then(response=> response.json())
+      .then(wish_list => dispatch({
         type: "ADD_WISH_LIST",
-        payload: wish_lists
-      }))
-    }
+        payload: wish_list
+    }))
   }
+}
+
 
 export const setWishLists = () => {
     return dispatch => {
@@ -174,6 +174,7 @@ export const wishListChange = (name, id) => {
   }
 }
 
+
 export const deleteWishList = (id) => {
     return dispatch => {
         fetch(API + "/wish_lists/" + id, {
@@ -232,10 +233,11 @@ export const setSelectedWish = (id) => {
     }
 }
 
-export const submitWish = (wishData) => {
+export const submitWish = (wishData, wish_list_id) => {
     debugger
     return dispatch => {
-      fetch(API + "/wishes", {
+    //   fetch(API + "/wishes", {
+        fetch(API + "/wish_lists/" + wish_list_id + "/wish/", {
         method: 'POST', // or 'PUT'
         headers: {
           'Authorization': localStorage.token,
@@ -248,10 +250,6 @@ export const submitWish = (wishData) => {
         type: "ADD_WISH",
         payload: wish
       }))
-
-//     return async dispatch => {
-//         console.log('dispatchj')
-//         dispatch({type: 'SET_WISHES', payload: wishData[wishData.length - 1]})
     }
 }
 

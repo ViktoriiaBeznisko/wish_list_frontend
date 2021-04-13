@@ -27,9 +27,8 @@ import classes from './ALL_wishs.module.css';
 //ALL_REDUCER_MODULE
 
 function WishList(props) {
-
   const [changeList,openChangeList] = useState(false);
-  const [wishes, setWishes] = useState(props.wishLists);
+  const wishes = props.wishes
   useEffect(mount,[])
   const dispatch = useDispatch()
   const selected = useSelector(state => state.wish_lists.selectedWishLists)
@@ -37,23 +36,26 @@ function WishList(props) {
   if (!props.user.id){
     return <Redirect to={'/login'} />
   }
-  function mount()
-  {
-    // props.setWishLists()
+  function mount(){
+    //   props.setWishes()
   }
 
-  const addWish = wish => {
-    if (!wish.text || /^\s*$/.test(wish.text)) {
-      return;
-    }
-    // pass wish to the array
-    const newWishes = [...wishes,wish];
-    
-    props.submitWish(newWishes)
-    // setting value to the new wish
-    setWishes(newWishes);
+//   const addWish = wish => {
+//     if (!wish.text || /^\s*$/.test(wish.text)) {
+//       return;
+//     }
+//     const newWishes = [...wishes,wish];
+//     props.submitWish(newWishes)
+
+// };
+
+    const addWish = (value) => {
+        // debugger
+        props.submitWish(value, selected.id)
+        openChangeList(false)
   };
 
+  // {isAdd && <ChangeList send={value => dispatch(addWishList({name : value}))} />}
 
   const updateWish = (wishId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
@@ -67,13 +69,13 @@ function WishList(props) {
       }
       return item
     })
-    setWishes(newArray)
+    props.submitWish(newArray)
+    // setWishes(newArray)
   };
     // checking in an actual array 
   const removeWish = id => {
     const removedArr = [...wishes].filter(wish => wish.id !== id);
     dispatch(setAllWishes(removedArr))
-    setWishes(removedArr);
   };
 
   const completeWish = id => {
@@ -96,7 +98,7 @@ function WishList(props) {
     <>
       <div className={classes.firstBlock}>
       <button onClick={props.logout} className={classes.logout}>Logout!</button>
-      <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logout}>Exit!</button>
+      <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logoutQ}>Exit!</button>
       <h1 className={classes.title}> Details:</h1>
     </div>
       <h1 className={classes.listNAME}>{props.list_name}</h1>
@@ -131,7 +133,8 @@ export const ChangeList = ({send}) => {
 const mapStateToProps = (state) => ({
   wishLists : state.wish_lists.wishLists,
   user: state.user,
-  list_name : state.wish_lists.selectedWishLists.name
+  list_name : state.wish_lists.selectedWishLists.name,
+  wishes: state.wish_lists.selectedWishLists.wishes
   // list_name : state.wish_lists.name
 })
 

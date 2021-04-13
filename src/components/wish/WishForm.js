@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux'
-// import { submitWishList, wishListChange, setWishLists, unsetWishList, setSelectedWishlists, updateWishList, deleteWishList, submitWish, wishChange, setWishes, setSelectedWish, updateWish, deleteWish, unsetWish } from '../../redux/actionCreators'
-import {Field,reduxForm} from "redux-form";
+// import { connect } from 'react-redux'
+// import {Field,reduxForm} from "redux-form";
 import classes from './wish_form.module.css';
 
 function WishForm(props) {
@@ -21,10 +20,10 @@ function WishForm(props) {
 
     props.onSubmit({
     // generate random number for id 
-      id: Math.floor(Math.random() * 10000),
+      // id: Math.floor(Math.random() * 10000),
       text: input1,
       link: input2,
-      
+      // wish_list_id: input3
     });
     debugger
     setInput1('');
@@ -93,6 +92,4 @@ function WishForm(props) {
 
 
 
-
-// export default connect(mapStateToProps, { submitWishList, wishListChange, setWishLists, unsetWishList, setSelectedWishlists, updateWishList, deleteWishList, submitWish, wishChange, setWishes, setSelectedWish, updateWish, deleteWish, unsetWish })(WishForm)
 export default WishForm;

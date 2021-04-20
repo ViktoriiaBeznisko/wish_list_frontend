@@ -32,7 +32,6 @@ function WishList(props) {
   useEffect(mount,[])
   const dispatch = useDispatch()
   const selected = useSelector(state => state.wish_lists.selectedWishLists)
-  // const selected = useSelector(state => state.wish_lists.setSelectedWish)
   if (!props.user.id){
     return <Redirect to={'/login'} />
   }
@@ -49,33 +48,24 @@ function WishList(props) {
 
 // };
 
-    const addWish = (value) => {
+  const addWish = (value) => {
         // debugger
-        props.submitWish(value, selected.id)
-        openChangeList(false)
+    props.submitWish(value, selected.id)
   };
 
-  // {isAdd && <ChangeList send={value => dispatch(addWishList({name : value}))} />}
 
-  const updateWish = (wishId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
-      return;
+  const updateWish = (wishId, newValue1) => {
+    if (!newValue1.text || /^\s*$/.test(newValue1.text)) {
+        return
+
     }
-
-    const newArray = wishes.map(item => {
-      //ITEM ID debug
-      if (item.id == wishId){
-        return {...item,...newValue}
-      }
-      return item
-    })
-    props.submitWish(newArray)
-    // setWishes(newArray)
+    props.updateWish(newValue1, wishId)
   };
     // checking in an actual array 
   const removeWish = id => {
-    const removedArr = [...wishes].filter(wish => wish.id !== id);
-    dispatch(setAllWishes(removedArr))
+    // const removedArr = [...wishes].filter(wish => wish.id !== id);
+    // debugger
+    dispatch(deleteWish(id))
   };
 
   const completeWish = id => {
@@ -87,7 +77,8 @@ function WishList(props) {
       return wish;
     });
     setWishes(updatedWishes);
-  };
+  };  
+  
   const changeWishList = (value) => {
     // debugger
     props.wishListChange({name : value}, selected.id)

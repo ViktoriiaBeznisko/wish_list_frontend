@@ -25,7 +25,6 @@ function WishForm(props) {
       link: input2,
       // wish_list_id: input3
     });
-    debugger
     setInput1('');
     setInput2('');
   };

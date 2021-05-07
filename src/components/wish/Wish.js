@@ -1,10 +1,10 @@
 import React, { useState,useRef } from 'react';
 import WishForm from './WishForm';
-import { RiCloseCircleLine, RiContactsBookLine } from 'react-icons/ri';
+import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
-import {NavLink} from "react-router-dom";
+// import {NavLink} from "react-router-dom";
 import classes from './ALL_wishs.module.css';
-import {BiInfoCircle} from "react-icons/all";
+// import {BiInfoCircle} from "react-icons/all";
 
 const Wish = ({ wishes, completeWish, removeWish, updateWish,...props }) => {
  
@@ -70,7 +70,7 @@ const WishItem = (wish) => {
           <input type="text" className={classes.none_display} value={createLink(wish.index)} ref={inputRef} readOnly/>
           </div>
           <div className={classes.wish_ITEM_text_icons_innerBlock}>
-          <NavLink to={`/wish_lists/${wish.index}`}><BiInfoCircle className={classes.wish_ITEM_text_icons_editIcon} /></NavLink>
+          {/* <NavLink to={`/wish_lists/${wish.index}`}><BiInfoCircle className={classes.wish_ITEM_text_icons_editIcon} /></NavLink> */}
 
           <TiEdit
               onClick={() => wish.setEdit({ id: wish.main.id, value1: wish.main.text, value2: wish.main.link  })}

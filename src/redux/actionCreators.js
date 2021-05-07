@@ -181,7 +181,7 @@ export const setAllWishes = data => {
 }
 
 export const setWishes = () => {
-    debugger
+    // debugger
     return dispatch => {
         fetch(API + "/wishes", {
             // fetch(API + "/wish_lists/" + id + "/wish", {
@@ -233,7 +233,6 @@ export const submitWish = (wishData, wish_list_id) => {
 }
 
 export const deleteWish = (id) => {
-    debugger
     return dispatch => {
         fetch(API + "/wishes/" + id, {
             method: 'DELETE',

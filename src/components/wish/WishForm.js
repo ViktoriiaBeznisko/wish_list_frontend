@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 // import {Field,reduxForm} from "redux-form";
 import classes from './wish_form.module.css';
 
+
+
 function WishForm(props) {
   const [input1, setInput1] = useState(props.edit ? props.edit.value1 : '');
   const [input2, setInput2] = useState(props.edit ? props.edit.value2 : '');
@@ -19,11 +21,9 @@ function WishForm(props) {
     e.preventDefault();
 
     props.onSubmit({
-    // generate random number for id 
       // id: Math.floor(Math.random() * 10000),
       text: input1,
       link: input2,
-      // wish_list_id: input3
     });
     setInput1('');
     setInput2('');
@@ -92,3 +92,4 @@ function WishForm(props) {
 
 
 export default WishForm;
+

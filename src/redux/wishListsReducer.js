@@ -83,7 +83,7 @@ const wishListsReducer = (state=initialState, action) => {
     }
 
     case "CLEAR_SELECTED_WISH_LIST":
-      return {...state,selectedWishLists:  nullWishLists}
+      return {...state,selectedWishLists: nullWishLists}
     default:
       return state
   }

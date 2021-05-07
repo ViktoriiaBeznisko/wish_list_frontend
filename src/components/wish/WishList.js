@@ -21,7 +21,7 @@ import {
 import {NavLink, Redirect, withRouter} from 'react-router-dom';
 import {useEffect} from 'react';
 import {compose} from "redux";
-import {Field, reduxForm} from "redux-form";
+// import {Field, reduxForm} from "redux-form";
 import classes from './ALL_wishs.module.css';
 
 //ALL_REDUCER_MODULE
@@ -57,11 +57,10 @@ function WishList(props) {
   const updateWish = (wishId, newValue1) => {
     if (!newValue1.text || /^\s*$/.test(newValue1.text)) {
         return
-
     }
     props.updateWish(newValue1, wishId)
   };
-    // checking in an actual array 
+
   const removeWish = id => {
     // const removedArr = [...wishes].filter(wish => wish.id !== id);
     // debugger
@@ -89,7 +88,7 @@ function WishList(props) {
     <>
       <div className={classes.firstBlock}>
       <button onClick={props.logout} className={classes.logout}>Logout!</button>
-      <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logoutQ}>Exit!</button>
+      <button onClick={() => dispatch(clearSelectedWishLists())} className={classes.logoutQ}>Go back!</button>
       <h1 className={classes.title}> Details:</h1>
     </div>
       <h1 className={classes.listNAME}>{props.list_name}</h1>
@@ -111,11 +110,14 @@ function WishList(props) {
 
 export const ChangeList = ({send}) => {
   const ref = useRef()
+  const selected = useSelector(state => state.wish_lists.selectedWishLists)
   return (
      <div className={classes.changeInput}>
        <h4 className={classes.changeInput_title}>Name:</h4>
-       <input type="text" ref={ref} className={classes.changeInput_input}
-       placeholder={'Name'}/>
+          <input type="text" ref={ref} className={classes.changeInput_input}
+          placeholder={selected.name}
+        //   value={selected.name}
+          />
        <button onClick={() => send(ref.current.value)} className={classes.changeInput_send}>Done</button>
      </div>
   )
